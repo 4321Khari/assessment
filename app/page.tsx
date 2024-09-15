@@ -1,101 +1,177 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+
+type form = {
+  name?: string;
+  lastName: string;
+  password: string;
+  retypePassword?: string;
+  contact?: string;
+  email?: string;
+};
 
 export default function Home() {
+  const [texttype, setTexttype] = useState<boolean>(false);
+  const [texttype1, setTexttype1] = useState<boolean>(false);
+  const [signIn, setSignIn] = useState<boolean>(true);
+  const [formdata, setFormdata] = useState<form>({
+    name: "",
+    lastName: "",
+    password: "",
+    retypePassword: "",
+    contact: "",
+    email: "",
+  });
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className=" w-full h-full flex">
+      <div className=" hidden sm:block w-1/2 h-screen ">
+        <img
+          alt="picture"
+          src={signIn ? "/Picture2.png" : "/Picture1.png"}
+          className={`${signIn ? " w-full h-full" : null}`}
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </div>
+      <div className="w-full sm:w-1/2">
+        <form
+          action=""
+          className=" w-full flex items-center h-screen   justify-center"
+        >
+          <div className="bg-white shadow-lg rounded-lg w-[90%]  sm:w-[60%] p-[4%]  mt-10 ">
+            <div className=" flex justify-between mt-4     items-center text-purple-900">
+              {" "}
+              <p className=" text-[2rem]  font-bold ">
+                Let us know <span className=" text-red-700">!</span>
+              </p>
+              {!signIn && (
+                <p
+                  onClick={(e) => setSignIn(true)}
+                  className=" text-lg font-bold underline cursor-pointer text-purple-900"
+                >
+                  Sign <span className=" text-red-700">In</span>
+                </p>
+              )}
+            </div>
+            {!signIn && (
+              <input
+                type="text"
+                name=""
+                placeholder="First Name"
+                id=""
+                required
+                className="  outline-none placeholder:text-black h-8 pl-2 mt-4 w-full  text-black border-b-2"
+              />
+            )}
+            <div className="mt-4">
+              <input
+                type={signIn ? "email" : "text"}
+                name=""
+                placeholder={signIn ? "Email" : "Last Name"}
+                id=""
+                required
+                className=" outline-none placeholder:text-black text-black w-full h-8 pl-2  border-b-2"
+              />
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <div className="   border-b-2 w-full mt-4 flex">
+              <input
+                type={texttype ? "text" : "password"}
+                name=""
+                placeholder={signIn ? "Password" : "Set Password"}
+                id=""
+                required
+                className=" placeholder:text-black outline-none  w-[94%] text-black  h-8 pl-2 "
+              />
+              {!texttype && (
+                <img
+                  src="/eye.png"
+                  alt=""
+                  onClick={() => setTexttype(true)}
+                  className="w-7 h-7 cursor-pointer "
+                />
+              )}
+
+              {texttype && (
+                <img
+                  src="/eyeClose.png"
+                  alt=""
+                  onClick={() => setTexttype(false)}
+                  className="w-7 h-7 cursor-pointer  "
+                />
+              )}
+            </div>
+            {!signIn && (
+              <div className=" mt-4 w-full border-b-2 flex">
+                <input
+                  type={texttype1 ? "text" : "password"}
+                  name=""
+                  placeholder="Retype Password"
+                  id=""
+                  required
+                  className=" placeholder:text-black outline-none text-black h-8 pl-2  w-[94%] "
+                />
+                {!texttype1 && (
+                  <img
+                    src="/eye.png"
+                    alt=""
+                    onClick={() => setTexttype1(true)}
+                    className="w-7 h-7  cursor-pointer"
+                  />
+                )}
+
+                {texttype1 && (
+                  <img
+                    src="/eyeClose.png"
+                    alt=""
+                    onClick={() => setTexttype1(false)}
+                    className="w-7 h-7 cursor-pointer"
+                  />
+                )}
+              </div>
+            )}
+            {!signIn && (
+              <div className=" mt-4">
+                <input
+                  type="text"
+                  name=""
+                  placeholder="Contact Mode"
+                  id=""
+                  required
+                  className=" placeholder:text-black outline-none text-black h-8 pl-2  w-full border-b-2"
+                />
+              </div>
+            )}
+            {!signIn && (
+              <div className=" mt-4">
+                <input
+                  type="text"
+                  name=""
+                  placeholder="Email"
+                  id=""
+                  required
+                  className="  placeholder:text-black outline-none text-black h-8 pl-2 w-full border-b-2"
+                />
+              </div>
+            )}
+
+            <div className=" mt-4">
+              <button
+                type="submit"
+                className=" w-full  rounded-lg h-11 bg-purple-900"
+              >
+                Sign Up
+              </button>
+            </div>
+            {signIn && (
+              <button
+                onClick={() => setSignIn(false)}
+                className=" border-purple-900  h-11  text-purple-900 rounded-lg border-2 mt-2  w-full"
+              >
+                Sign Up
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
